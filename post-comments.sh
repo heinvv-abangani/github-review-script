@@ -43,8 +43,29 @@ if [ -z "$GITHUB_TOKEN" ]; then
     exit 1
 fi
 
-OWNER="elementor"
-REPO="elementor"
+# Extract owner and repo from environment or use defaults
+OWNER="${GITHUB_OWNER:-}"
+REPO="${GITHUB_REPO:-}"
+
+# Allow command line override: ./post-comments.sh [owner] [repo] [pr_number] [comments_file]
+if [ $# -ge 2 ] && [[ "$1" != PR-* ]] && [[ "$1" != *".json" ]]; then
+    OWNER="$1"
+    REPO="$2"
+    shift 2
+fi
+
+if [ -z "$OWNER" ] || [ -z "$REPO" ]; then
+    echo "❌ Repository not specified. Set environment variables or pass as arguments:"
+    echo ""
+    echo "Environment variables:"
+    echo "  export GITHUB_OWNER=\"your-username\""
+    echo "  export GITHUB_REPO=\"your-repo-name\""
+    echo ""
+    echo "Or pass as arguments:"
+    echo "  $0 owner repo [pr_number] [comments_file]"
+    echo ""
+    exit 1
+fi
 PR_URL="https://github.com/${OWNER}/${REPO}/pull/${PR_NUMBER}"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

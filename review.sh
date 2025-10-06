@@ -10,7 +10,7 @@ if [ -z "$PR_URL" ]; then
   echo "❌ Usage: ./review.sh <PR_URL>"
   echo ""
   echo "Example:"
-  echo "  ./review.sh https://github.com/elementor/elementor/pull/32958"
+  echo "  ./review.sh https://github.com/owner/repo/pull/123"
   exit 1
 fi
 
@@ -70,7 +70,7 @@ Review GitHub PR: ${PR_URL}
      {
        "file": "path/to/file.js",
        "line": 42,
-       "body": "TMZ Review MCP: 🚨 **Critical Issue**\\n\\n**Rule:** [rule-name]\\n\\n**Issue:** [description]\\n\\n**Fix:**\\n\`\`\`javascript\\n// Recommended\\n[code]\\n\`\`\`",
+       "body": "Cursor Review: 🚨 **Critical Issue**\\n\\n**Rule:** [rule-name]\\n\\n**Issue:** [description]\\n\\n**Fix:**\\n\`\`\`javascript\\n// Recommended\\n[code]\\n\`\`\`",
        "severity": "CRITICAL"
      }
    ]
@@ -78,7 +78,7 @@ Review GitHub PR: ${PR_URL}
    
    **Rules for JSON:**
    - Only include Critical and High severity issues
-   - Start each body with "TMZ Review MCP: " prefix
+   - Start each body with "Cursor Review: " prefix
    - Use \\n for newlines in body
    - Include file path and line number
    - Escape quotes properly

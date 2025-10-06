@@ -8,7 +8,7 @@ Simplified PR review workflow for Cursor Chat.
 
 **Review a PR:**
 ```
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 **Post comments:**
@@ -22,7 +22,7 @@ post comments
 cd github-review-script
 
 # Review
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 
 # Post
 ./post-comments.sh
@@ -57,8 +57,8 @@ github-review-script/
 └── README.md             # This file
 
 ../pr-reviews/            # Generated reviews (gitignored)
-├── PR-32958-2025-10-06.md
-└── PR-32958-comments.json
+├── PR-123-2025-10-06.md
+└── PR-123-comments.json
 ```
 
 ## ⚙️ Setup
@@ -67,18 +67,27 @@ github-review-script/
 # 1. Set GitHub token
 export GITHUB_TOKEN="ghp_your_token_here"
 
-# 2. Done!
+# 2. Set repository (for post-comments.sh)
+export GITHUB_OWNER="your-username"
+export GITHUB_REPO="your-repo-name"
+
+# 3. Done!
+```
+
+**Alternative:** Pass repository as arguments:
+```bash
+./post-comments.sh owner repo
 ```
 
 ## 🎯 Example Workflow
 
 ```bash
 # 1. Review a PR
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 # Copy prompt to Cursor Chat
 
 # 2. Check output
-cat ../pr-reviews/PR-32958-comments.json
+cat ../pr-reviews/PR-123-comments.json
 
 # 3. Post comments
 ./post-comments.sh
@@ -88,20 +97,20 @@ cat ../pr-reviews/PR-32958-comments.json
 
 ## 📊 What Gets Generated
 
-### Markdown Review (`PR-32958-2025-10-06.md`)
+### Markdown Review (`PR-123-2025-10-06.md`)
 - Executive summary
 - Issue statistics  
 - Critical/High/Medium issues with fixes
 - Security assessment
 - Performance analysis
 
-### Comments JSON (`PR-32958-comments.json`)
+### Comments JSON (`PR-123-comments.json`)
 ```json
 [
   {
     "file": "path/to/file.js",
     "line": 42,
-    "body": "TMZ Review MCP: 🚨 **Critical Issue**\n\n...",
+    "body": "Cursor Review: 🚨 **Critical Issue**\n\n...",
     "severity": "CRITICAL"
   }
 ]

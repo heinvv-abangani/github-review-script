@@ -7,7 +7,7 @@ filePatterns: ["**/*"]
 
 # Git Commits and PR Guidelines
 
-Reference: [Git Commits & PR Guidelines](https://elementor.atlassian.net/wiki/spaces/RDDEP/pages/410719307/Git+Commits+PR+Guidelines)
+Reference: Git Commits & PR Guidelines
 
 ## Before committing
 

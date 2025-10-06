@@ -11,19 +11,19 @@ Automated GitHub Pull Request review system for Cursor Chat.
 export GITHUB_TOKEN="ghp_your_token_here"
 
 # Navigate to script directory
-cd /Users/janvanvlastuin1981/Local\ Sites/elementor/app/public/wp-content/github-review-script
+cd github-review-script
 ```
 
 ### 2. Review a PR
 
 **In Cursor Chat:**
 ```
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 **Or using script:**
 ```bash
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 # Copy the generated prompt to Cursor Chat
 ```
 
@@ -87,7 +87,7 @@ github-review-script/              # This repository
 
 When you type in Cursor Chat:
 ```
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 Cursor will:
@@ -132,7 +132,7 @@ GitHub-ready comments:
   {
     "file": "path/to/file.js",
     "line": 42,
-    "body": "TMZ Review MCP: 🚨 **Critical Issue**\n\n...",
+    "body": "AI Review: 🚨 **Critical Issue**\n\n...",
     "severity": "CRITICAL"
   }
 ]
@@ -246,7 +246,7 @@ export GITHUB_TOKEN="ghp_your_token_here"
 
 ```bash
 # 1. Review a PR
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 # (Copy prompt to Cursor Chat)
 
 # 2. Check the output
@@ -260,7 +260,7 @@ cat ../pr-reviews/PR-32958-comments.json
 
 ## 🔗 GitHub Repository
 
-This repository: [github-review-script](https://github.com/elementor/elementor/pull/32958/files)
+This repository: [github-review-script](https://github.com/your-username/github-review-script)
 
 ## 📞 Support
 

@@ -6,7 +6,7 @@ Quick reference for the new simplified workflow.
 
 ### 1. Review PR
 ```
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 ### 2. Post Comments
@@ -21,8 +21,8 @@ That's it! 🎉
 ### When you run `review [PR_URL]`:
 
 1. **Extracts PR info**
-   - Owner: `elementor`
-   - Repo: `elementor`
+   - Owner: `owner`
+   - Repo: `repo`
    - PR Number: `32958`
 
 2. **Fetches PR data**
@@ -75,7 +75,7 @@ pr-reviews/
 ```bash
 # Terminal 1: Generate review prompt
 cd github-review-script
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 
 # Cursor Chat: Paste the prompt
 # Wait for review to complete...
@@ -98,7 +98,7 @@ post comments
 **Pattern 1: Review**
 ```
 review <URL>
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 **Pattern 2: Post**
@@ -137,7 +137,7 @@ echo $GITHUB_TOKEN
 
 # Test scripts
 cd github-review-script
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 ```
 
 ## 🧹 Automatic Cleanup
@@ -189,7 +189,7 @@ This PR updates event handling in the Kit Library module...
   {
     "file": "app/modules/kit-library/assets/js/context/tracking-context.js",
     "line": 15,
-    "body": "TMZ Review MCP: 🚨 **Critical: Missing PropTypes validation**...",
+    "body": "AI Review: 🚨 **Critical: Missing PropTypes validation**...",
     "severity": "CRITICAL"
   }
 ]

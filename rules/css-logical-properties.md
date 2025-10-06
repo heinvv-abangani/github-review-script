@@ -7,11 +7,11 @@ filePatterns: ["**/*.css", "**/*.scss"]
 
 # CSS Logical Properties
 
-Reference: [Logical Properties (Confluence)](https://elementor.atlassian.net/wiki/spaces/RDDEP/pages/682262596/Logical+Properties)
+Reference: CSS Logical Properties Best Practices
 
 ## Introduction
 
-Elementor uses CSS logical properties instead of physical properties. This enables automatic support for different writing modes and directions (LTR/RTL) without maintaining parallel styles.
+Use CSS logical properties instead of physical properties. This enables automatic support for different writing modes and directions (LTR/RTL) without maintaining parallel styles.
 
 ## Meaning
 
@@ -36,7 +36,7 @@ Example for `padding-inline-start` based on language and writing direction:
 
 ## Things to watch
 
-- Do not use `inset-*` for now due to BC; Elementor supports Safari 14, while many `inset` values require Safari 14.1
+- Do not use `inset-*` for now due to browser compatibility; many `inset` values require Safari 14.1+
 - Some properties lack logical equivalents (e.g., `background-position`, `object-position`, `transform-origin`, `translate-x`, `translate-y`)
 - Some logical properties landed recently and may have poor BC in older browsers (e.g., `overflow-inline`, `overflow-block`)
 - Some logical properties exist but have low overall support (e.g., `float`, `inline-size`/`block-size`)
@@ -48,7 +48,7 @@ Focus refactors on fully supported properties first: margin, padding, border, an
 Always verify support before refactoring:
 
 - Can I use: [CSS Logical Properties](https://caniuse.com/?search=logical%20properties)
-- Elementor requirements: System Requirements (see project docs)
+- Browser compatibility: Check project requirements for minimum supported versions
 - Code references:
   - `.grunt-config/webpack.js` (browsers targets)
   - `.browserslistrc`

@@ -8,7 +8,7 @@ Simplified workflow for PR reviews using Cursor Chat commands.
 
 In Cursor Chat, type:
 ```
-review https://github.com/elementor/elementor/pull/32958
+review https://github.com/owner/repo/pull/123
 ```
 
 This will:
@@ -41,7 +41,7 @@ review https://github.com/elementor/elementor/pull/[NUMBER]
 **Alternative with script:**
 ```bash
 cd /path/to/github-review-script
-./review.sh https://github.com/elementor/elementor/pull/32958
+./review.sh https://github.com/owner/repo/pull/123
 # Then copy the generated prompt to Cursor Chat
 ```
 
@@ -63,7 +63,7 @@ cd /path/to/github-review-script
 When you type "review [PR_URL]", Cursor should expand it to:
 
 ```
-Review GitHub PR: https://github.com/elementor/elementor/pull/32958
+Review GitHub PR: https://github.com/owner/repo/pull/123
 
 **Tasks:**
 
@@ -84,7 +84,7 @@ Review GitHub PR: https://github.com/elementor/elementor/pull/32958
      {
        "file": "path/to/file.js",
        "line": 42,
-       "body": "TMZ Review MCP: 🚨 **Critical Issue**\n\n**Rule:** [rule-name]\n\n**Issue:** [description]\n\n**Fix:**\n```javascript\n// Recommended\n[code]\n```",
+       "body": "AI Review: 🚨 **Critical Issue**\n\n**Rule:** [rule-name]\n\n**Issue:** [description]\n\n**Fix:**\n```javascript\n// Recommended\n[code]\n```",
        "severity": "CRITICAL"
      }
    ]
@@ -92,7 +92,7 @@ Review GitHub PR: https://github.com/elementor/elementor/pull/32958
    
    **Rules for JSON:**
    - Only include Critical and High severity issues
-   - Start each body with "TMZ Review MCP: " prefix
+   - Start each body with "AI Review: " prefix
    - Use \n for newlines in body
    - Include file path and line number
    - Escape quotes properly
@@ -175,7 +175,7 @@ When user says "post comments":
 # PR Review: #32958 - [Title]
 
 **Date:** 2025-10-06 14:30:00
-**Repository:** elementor/elementor
+**Repository:** owner/repo
 **Status:** [PASSED | NEEDS_WORK | BLOCKED]
 
 ## Executive Summary
@@ -203,7 +203,7 @@ When user says "post comments":
   {
     "file": "app/modules/kit-library/assets/js/context/tracking-context.js",
     "line": 15,
-    "body": "TMZ Review MCP: 🚨 **Critical: Missing PropTypes validation**\n\n**Rule:** react-performance\n\n**Issue:** TrackingProvider component is missing PropTypes validation for children prop.\n\n**Fix:**\n```javascript\nimport PropTypes from 'prop-types';\n\nTrackingProvider.propTypes = {\n  children: PropTypes.node.isRequired\n};\n```",
+    "body": "AI Review: 🚨 **Critical: Missing PropTypes validation**\n\n**Rule:** react-performance\n\n**Issue:** TrackingProvider component is missing PropTypes validation for children prop.\n\n**Fix:**\n```javascript\nimport PropTypes from 'prop-types';\n\nTrackingProvider.propTypes = {\n  children: PropTypes.node.isRequired\n};\n```",
     "severity": "CRITICAL"
   }
 ]

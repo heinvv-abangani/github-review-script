@@ -7,7 +7,7 @@ filePatterns: ["**/*.test.ts", "**/*.spec.ts", "**/__tests__/**/*", "**/playwrig
 
 # Editor Playwright Best Practices
 
-Reference: [Editor Playwright Best Practices](https://elementor.atlassian.net/wiki/spaces/RDDEP/pages/835617108/Editor+Playwright+Best+Practices)
+Reference: Playwright Best Practices for E2E Testing
 
 ## Experiments
 
@@ -47,9 +47,9 @@ test('Copy Paste widget test', async ({ page }, testInfo) => {
 Bad:
 
 ```ts
-await page.locator('.elementor-tab-control-style').click();
-await page.locator('.elementor-control-icon_section_style').click();
-await page.locator('.elementor-control-icon_size [data-setting="size"]').first().fill('50');
+await page.locator('.tab-control-style').click();
+await page.locator('.control-icon_section_style').click();
+await page.locator('.control-icon_size [data-setting="size"]').first().fill('50');
 ```
 
 Good:
