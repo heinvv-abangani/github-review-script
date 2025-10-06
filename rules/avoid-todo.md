@@ -10,7 +10,7 @@ rules:
     severity: "warning"
 examples:
   - bad: "// TODO: Fix this later"
-  - good: "// FIXME: Handle edge case for null values (Ticket: ABC-123)"
+  - good: "// TODO: Handle edge case for null values (Ticket: ABC-123)"
 ---
 
 # Avoid TODO Comments
@@ -28,11 +28,11 @@ Do not leave generic `TODO` comments in committed code. They create technical de
 
 1. **Complete the work** before committing
 2. **Create a ticket** and reference it in the comment
-3. **Use specific comments** like `FIXME` with context
+3. **Use specific comments** like `TODO` with context and a ticket number
 4. **Remove** the comment if it's no longer relevant
 
 ## Acceptable Alternatives
 
-- `// FIXME: Handle null case (Ticket: DEV-456)`
+- `// TODO: Handle null case (Ticket: DEV-456)`
 - `// NOTE: This is a temporary workaround for API limitation`
 - `// HACK: Remove when upstream library fixes bug #123`

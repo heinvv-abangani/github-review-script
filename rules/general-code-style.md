@@ -17,6 +17,12 @@ filePatterns: ["**/*"]
 - Always pay attention for clarity, maintainability, and ease of understanding, even if the underlying logic does not change.
 - Code style and developer experience are important for long-term project health.
 
+## Avoid Comments and Class/Method Docblocks
+- Do not add comments unless absolutely necessary to explain what the code is doing
+- Do not add Docblocks to methods, classes, or files
+- Prefer self-documenting code over explanatory comments
+
 ## Self Documented Code
-- Avoid adding comments that can be a constants or a well named function
-- Always prefer to create small funcitons that describe themself
+- Avoid adding comments that can be constants or well-named functions
+- Always prefer to create small functions that describe themselves
+- Use descriptive variable and function names instead of comments
