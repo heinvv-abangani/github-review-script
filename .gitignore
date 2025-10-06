@@ -1,0 +1,32 @@
+# PR Review outputs (generated files)
+../pr-reviews/
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Environment files
+.env
+.env.local
+
+# Test outputs
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+logs/

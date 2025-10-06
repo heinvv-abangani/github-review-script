@@ -1,0 +1,80 @@
+{
+  "github-CORRECTED-WITH-DOCKER": {
+    "comment": "Use this if you have Docker and GITHUB_TOKEN",
+    "config": {
+      "github": {
+        "command": "/usr/local/bin/prompt_security/prompt_security_mcp",
+        "args": [
+          "/Users/janvanvlastuin1981/.cursor/mcp.json",
+          "github"
+        ],
+        "server": {
+          "command": "docker",
+          "args": [
+            "run",
+            "-i",
+            "--rm",
+            "-e",
+            "GITHUB_PERSONAL_ACCESS_TOKEN",
+            "ghcr.io/github/github-mcp-server:latest"
+          ],
+          "env": {
+            "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}"
+          }
+        }
+      }
+    }
+  },
+  "github-CORRECTED-WITH-COPILOT": {
+    "comment": "Use this if you have GitHub Copilot subscription",
+    "config": {
+      "github": {
+        "command": "/usr/local/bin/prompt_security/prompt_security_mcp",
+        "args": [
+          "/Users/janvanvlastuin1981/.cursor/mcp.json",
+          "github"
+        ],
+        "server": {
+          "url": "https://api.githubcopilot.com/mcp/",
+          "transport": {
+            "type": "http"
+          },
+          "auth": {
+            "type": "oauth",
+            "scopes": ["repo", "read:org", "workflow"]
+          }
+        }
+      }
+    }
+  },
+  "YOUR-CURRENT-BROKEN-CONFIG": {
+    "comment": "This is what you currently have - it's missing the wrapper structure",
+    "config": {
+      "github": {
+        "url": "https://api.githubcopilot.com/mcp/",
+        "type": "http",
+        "auth": {
+          "type": "oauth",
+          "scopes": ["repo", "read:org", "workflow"]
+        }
+      }
+    }
+  },
+  "THE-PROBLEM": {
+    "explanation": [
+      "Your GitHub MCP config is missing the prompt_security_mcp wrapper",
+      "All your other MCP servers use this wrapper pattern",
+      "The GitHub config needs to match this pattern",
+      "",
+      "Choose either:",
+      "1. Docker version (if you have Docker + GITHUB_TOKEN)",
+      "2. Copilot version (if you have GitHub Copilot subscription)",
+      "",
+      "Copy the appropriate config from above and replace the 'github' section in ~/.cursor/mcp.json"
+    ]
+  }
+}
+
+
+
+
