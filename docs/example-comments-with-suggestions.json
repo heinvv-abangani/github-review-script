@@ -1,0 +1,46 @@
+[
+  {
+    "severity": "Critical",
+    "file": "app/modules/onboarding/assets/js/components/good-to-go-content-a.js",
+    "line": 13,
+    "title": "Console.log Statement Left in Production Code",
+    "body": "TMZ Review MCP: 🚨 **Critical: Debug Console.log Statement in Production**\n\n**Rule:** debug-first-engineering\n\n**Issue:** Debug console.log statement not removed before commit.\n\n**Impact:** Performance and security - debug statements should not reach production. They can expose internal application logic, leak sensitive data, and impact performance in production environments.\n\n**Suggested Fix:**\n```suggestion\n\t\t// Remove debug statement for production\n```",
+    "suggestion": {
+      "original_code": "\t\tconsole.log( 'Good to go content A loaded' );",
+      "suggested_code": "\t\t// Remove debug statement for production"
+    }
+  },
+  {
+    "severity": "Critical", 
+    "file": "app/modules/kit-library/assets/js/components/kit-already-applied-dialog.js",
+    "line": 30,
+    "title": "Handler Invocation Bug - Function Called Instead of Passed",
+    "body": "TMZ Review MCP: 🚨 **Critical: Handler Function Invoked Immediately**\n\n**Rule:** debug-first-engineering\n\n**Issue:** Handler function is being invoked immediately instead of passed as callback reference.\n\n**Impact:** Functional bug - dialog actions will execute immediately on render instead of when user clicks the button. This breaks the intended user interaction flow.\n\n**Suggested Fix:**\n```suggestion\ndismissButtonOnClick={ () => tracking.trackKitdemoApplyRemoveExisting( false, props.dismissButtonOnClick ) }\n```",
+    "suggestion": {
+      "original_code": "dismissButtonOnClick={ () => tracking.trackKitdemoApplyRemoveExisting( false, props.dismissButtonOnClick() ) }",
+      "suggested_code": "dismissButtonOnClick={ () => tracking.trackKitdemoApplyRemoveExisting( false, props.dismissButtonOnClick ) }"
+    }
+  },
+  {
+    "severity": "High",
+    "file": "app/modules/kit-library/assets/js/hooks/use-kit-library-tracking.js",
+    "line": 42,
+    "title": "Missing Dependencies in useCallback",
+    "body": "TMZ Review MCP: ⚠️ **High Priority: Missing Dependencies in useCallback**\n\n**Rule:** self-documenting-code\n\n**Issue:** Missing dependencies (kitName, navigate) in useCallback dependency array.\n\n**Impact:** Potential stale closures and incorrect behavior. The callback may reference outdated values of kitName and navigate, leading to bugs that are difficult to debug.\n\n**Suggested Fix:**\n```suggestion\n\t], [ id, kitName, navigate ] );\n```",
+    "suggestion": {
+      "original_code": "\t], [ id ] );",
+      "suggested_code": "\t], [ id, kitName, navigate ] );"
+    }
+  },
+  {
+    "severity": "High",
+    "file": "elementor.php", 
+    "line": 1,
+    "title": "Hardcoded Mixpanel Token in Production Code",
+    "body": "TMZ Review MCP: 🚨 **Critical: Hardcoded Mixpanel Token in Production Code**\n\n**Rule:** security-best-practices\n\n**Issue:** Mixpanel token is hardcoded directly in the main plugin file.\n\n**Impact:** Security vulnerability - tokens should never be committed to version control. This exposes the token to anyone with repository access and could lead to unauthorized analytics access or data manipulation.\n\n**Suggested Fix:**\n```suggestion\n// Use environment variable or config instead of hardcoding\ndefine( 'ELEMENTOR_MIXPANEL_TOKEN', get_option( 'elementor_mixpanel_token', '' ) );\n```",
+    "suggestion": {
+      "original_code": "define( 'ELEMENTOR_MIXPANEL_TOKEN', 'your-hardcoded-token-here' );",
+      "suggested_code": "// Use environment variable or config instead of hardcoding\ndefine( 'ELEMENTOR_MIXPANEL_TOKEN', get_option( 'elementor_mixpanel_token', '' ) );"
+    }
+  }
+]

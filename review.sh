@@ -70,8 +70,12 @@ Review GitHub PR: ${PR_URL}
      {
        "file": "path/to/file.js",
        "line": 42,
-       "body": "Cursor Review: 🚨 **Critical Issue**\\n\\n**Rule:** [rule-name]\\n\\n**Issue:** [description]\\n\\n**Fix:**\\n\`\`\`javascript\\n// Recommended\\n[code]\\n\`\`\`",
-       "severity": "CRITICAL"
+       "body": "Cursor Review: 🚨 **Critical Issue**\\n\\n**Rule:** [rule-name]\\n\\n**Issue:** [description]\\n\\n**Suggested Fix:**\\n\`\`\`suggestion\\n// Fixed code here\\nconst fixedCode = 'example';\\n\`\`\`",
+       "severity": "CRITICAL",
+       "suggestion": {
+         "original_code": "const brokenCode = 'example';",
+         "suggested_code": "const fixedCode = 'example';"
+       }
      }
    ]
    \`\`\`
@@ -83,6 +87,12 @@ Review GitHub PR: ${PR_URL}
    - Include file path and line number
    - Escape quotes properly
    - Make actionable and specific
+   - **ALWAYS include suggestions when possible:**
+     - Use \`\`\`suggestion code blocks in body for GitHub commit suggestions
+     - Add optional "suggestion" object with original_code and suggested_code
+     - Suggestions should be complete, working code replacements
+     - Focus on single-line or small multi-line fixes
+     - Ensure suggested code follows project coding standards
 
 4. **Summary:**
    - Display statistics

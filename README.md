@@ -33,6 +33,7 @@ cd github-review-script
 - **[docs/WORKFLOW.md](./docs/WORKFLOW.md)** - Complete workflow guide (START HERE!)
 - **[docs/README-SIMPLE.md](./docs/README-SIMPLE.md)** - Simple commands reference
 - **[docs/CURSOR-INTEGRATION.md](./docs/CURSOR-INTEGRATION.md)** - Cursor Chat setup
+- **[docs/SUGGESTIONS-GUIDE.md](./docs/SUGGESTIONS-GUIDE.md)** - GitHub commit suggestions guide
 
 ## 🎯 Features
 
@@ -41,6 +42,7 @@ cd github-review-script
 ✅ **Auto Cleanup** - Removes files older than 3 days  
 ✅ **22 Coding Rules** - Comprehensive rule set in `rules/` directory  
 ✅ **Smart Output** - Markdown for humans, JSON for GitHub API  
+✨ **Commit Suggestions** - Generate GitHub suggestions that authors can apply with one click  
 
 ## 📁 File Structure
 

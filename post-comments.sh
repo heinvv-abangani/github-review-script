@@ -122,8 +122,9 @@ if command -v jq &> /dev/null; then
         LINE=$(echo "$comment" | jq -r '.line')
         BODY=$(echo "$comment" | jq -r '.body')
         SEVERITY=$(echo "$comment" | jq -r '.severity // "Issue"')
+        HAS_SUGGESTION=$(echo "$BODY" | grep -q '```suggestion' && echo "✨" || echo "")
         
-        echo "  ↳ $FILE:$LINE [$SEVERITY]"
+        echo "  ↳ $FILE:$LINE [$SEVERITY] $HAS_SUGGESTION"
         
         RESPONSE=$(curl -s -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
@@ -151,6 +152,8 @@ else
     exit 1
 fi
 
+SUGGESTIONS_COUNT=$(cat "$COMMENTS_FILE" | jq -r '.[].body' | grep -c '```suggestion' 2>/dev/null || echo "0")
+
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Summary"
@@ -158,9 +161,14 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 echo "  ✅ Posted: ${POSTED} comments"
 echo "  ❌ Failed: ${FAILED} comments"
+echo "  ✨ With suggestions: ${SUGGESTIONS_COUNT} comments"
 echo ""
 echo "  View at: ${PR_URL}/files"
 echo ""
+if [ "$SUGGESTIONS_COUNT" -gt 0 ]; then
+    echo "  💡 Authors can click 'Commit suggestion' to apply fixes directly!"
+    echo ""
+fi
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "🧹 Running cleanup..."
