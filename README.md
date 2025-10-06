@@ -30,33 +30,17 @@ cd github-review-script
 
 ## 📚 Documentation
 
-- **[WORKFLOW.md](./WORKFLOW.md)** - Complete workflow guide (START HERE!)
-- **[README-SIMPLE.md](./README-SIMPLE.md)** - Simple commands reference
-- **[CURSOR-INTEGRATION.md](./CURSOR-INTEGRATION.md)** - Cursor Chat setup
-- **[QUICK-START.md](./QUICK-START.md)** - Original detailed guide
-- **[MCP-SETUP-GUIDE.md](./MCP-SETUP-GUIDE.md)** - GitHub MCP configuration
+- **[docs/WORKFLOW.md](./docs/WORKFLOW.md)** - Complete workflow guide (START HERE!)
+- **[docs/README-SIMPLE.md](./docs/README-SIMPLE.md)** - Simple commands reference
+- **[docs/CURSOR-INTEGRATION.md](./docs/CURSOR-INTEGRATION.md)** - Cursor Chat setup
 
 ## 🎯 Features
 
-✅ **Simple Commands**
-- Two commands: `review [URL]` and `post comments`
-- Automatic file naming with PR numbers
-- Automatic cleanup of old files
-
-✅ **Comprehensive Rules**
-- 22 coding rules in `rules/` directory
-- TypeScript, React, PHP, WordPress, Security
-- Actionable recommendations with code examples
-
-✅ **Smart Output**
-- Markdown review for humans
-- JSON comments for GitHub API
-- Automatic PR number extraction
-
-✅ **Clean Workspace**
-- Auto-cleanup after 3 days
-- Organized file structure
-- Gitignored review files
+✅ **Simple Commands** - Two commands: `review [URL]` and `post comments`  
+✅ **Automatic Naming** - Files use PR number prefix: `PR-32958-comments.json`  
+✅ **Auto Cleanup** - Removes files older than 3 days  
+✅ **22 Coding Rules** - Comprehensive rule set in `rules/` directory  
+✅ **Smart Output** - Markdown for humans, JSON for GitHub API  
 
 ## 📁 File Structure
 
@@ -66,9 +50,11 @@ github-review-script/
 ├── post-comments.sh      # Post comments to GitHub
 ├── cleanup.sh            # Clean old files
 ├── rules/                # 22 coding rules
-├── WORKFLOW.md           # Complete workflow guide
-├── README-SIMPLE.md      # Simple commands
-└── CURSOR-INTEGRATION.md # Cursor setup
+├── docs/                 # Documentation
+│   ├── WORKFLOW.md       # Complete workflow guide
+│   ├── README-SIMPLE.md  # Simple commands
+│   └── CURSOR-INTEGRATION.md # Cursor setup
+└── README.md             # This file
 
 ../pr-reviews/            # Generated reviews (gitignored)
 ├── PR-32958-2025-10-06.md
@@ -81,15 +67,8 @@ github-review-script/
 # 1. Set GitHub token
 export GITHUB_TOKEN="ghp_your_token_here"
 
-# 2. Make scripts executable (if needed)
-chmod +x *.sh
-
-# 3. Done!
+# 2. Done!
 ```
-
-## 📖 Usage
-
-See **[WORKFLOW.md](./WORKFLOW.md)** for complete guide.
 
 ## 🎯 Example Workflow
 
@@ -107,28 +86,16 @@ cat ../pr-reviews/PR-32958-comments.json
 # Done! ✅
 ```
 
-## 🧹 Automatic Cleanup
-
-Cleanup runs automatically after posting comments and removes files older than 3 days.
-
-Manual cleanup:
-```bash
-./cleanup.sh     # 3 days (default)
-./cleanup.sh 7   # 7 days
-```
-
 ## 📊 What Gets Generated
 
 ### Markdown Review (`PR-32958-2025-10-06.md`)
-Complete review with:
 - Executive summary
-- Issue statistics
+- Issue statistics  
 - Critical/High/Medium issues with fixes
 - Security assessment
 - Performance analysis
 
 ### Comments JSON (`PR-32958-comments.json`)
-GitHub-ready comments:
 ```json
 [
   {
@@ -143,8 +110,7 @@ GitHub-ready comments:
 ## 🛠️ Troubleshooting
 
 ### "No comments JSON found"
-- Check file naming: `PR-[NUMBER]-comments.json`
-- Verify review completed successfully
+Check file naming: `PR-[NUMBER]-comments.json`
 
 ### "GITHUB_TOKEN not set"
 ```bash
@@ -157,14 +123,7 @@ echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
 - Check line numbers are in changed hunks
 - Ensure PR is still open
 
-## 📞 Support
-
-- [TROUBLESHOOTING-GITHUB-MCP.md](./TROUBLESHOOTING-GITHUB-MCP.md)
-- [WORKFLOW.md](./WORKFLOW.md)
-- [CURSOR-INTEGRATION.md](./CURSOR-INTEGRATION.md)
-
 ---
 
 **Version:** 2.0 (Simplified)  
-**Last Updated:** October 6, 2025  
-**Repository:** https://github.com/elementor/elementor/pull/32958/files
+**Last Updated:** October 6, 2025

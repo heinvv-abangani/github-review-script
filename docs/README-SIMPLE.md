@@ -74,7 +74,6 @@ github-review-script/              # This repository
 │   └── ... (19 more)
 ├── README-SIMPLE.md              # This file
 ├── CURSOR-INTEGRATION.md         # Cursor Chat guide
-└── scripts/                      # Original helper scripts
 
 ../pr-reviews/                    # Generated reviews (gitignored)
 ├── PR-32958-2025-10-06.md       # Markdown review
