@@ -1,140 +1,105 @@
-# GitHub PR Review Script
+# 📝 GitHub PR Comments Script
 
-Simplified PR review workflow for Cursor Chat.
+Automatically post line-specific code suggestions to GitHub pull requests using GitHub CLI.
 
 ## 🚀 Quick Start
 
-### For Cursor Chat Users
-
-**Review a PR:**
-```
-review https://github.com/owner/repo/pull/123
-```
-
-**Post comments:**
-```
-post comments
-```
-
-### For Terminal Users
-
 ```bash
-cd github-review-script
+# 1. Install requirements
+brew install gh jq
 
-# Review
-./review.sh https://github.com/owner/repo/pull/123
+# 2. Authenticate with GitHub
+gh auth login
 
-# Post
-./post-comments.sh
+# 3. Create comments JSON file
+cat > PR-12345-comments.json << 'EOF'
+[
+  {
+    "file": "src/component.js",
+    "line": 42,
+    "body": "Issue description\\n\\n```suggestion\\nfixed code line\\n```",
+    "severity": "CRITICAL"
+  }
+]
+EOF
+
+# 4. Post comments
+./post-comments.sh 12345 PR-12345-comments.json
 ```
 
-## 📚 Documentation
+## 📋 Comment Format
 
-- **[docs/WORKFLOW.md](./docs/WORKFLOW.md)** - Complete workflow guide (START HERE!)
-- **[docs/README-SIMPLE.md](./docs/README-SIMPLE.md)** - Simple commands reference
-- **[docs/CURSOR-INTEGRATION.md](./docs/CURSOR-INTEGRATION.md)** - Cursor Chat setup
-- **[docs/SUGGESTIONS-GUIDE.md](./docs/SUGGESTIONS-GUIDE.md)** - GitHub commit suggestions guide
-
-## 🎯 Features
-
-✅ **Simple Commands** - Two commands: `review [URL]` and `post comments`  
-✅ **Automatic Naming** - Files use PR number prefix: `PR-32958-comments.json`  
-✅ **Auto Cleanup** - Removes files older than 3 days  
-✅ **22 Coding Rules** - Comprehensive rule set in `rules/` directory  
-✅ **Smart Output** - Markdown for humans, JSON for GitHub API  
-✨ **Commit Suggestions** - Generate GitHub suggestions that authors can apply with one click  
-
-## 📁 File Structure
-
-```
-github-review-script/
-├── review.sh              # Generate review prompt
-├── post-comments.sh      # Post comments to GitHub
-├── cleanup.sh            # Clean old files
-├── rules/                # 22 coding rules
-├── docs/                 # Documentation
-│   ├── WORKFLOW.md       # Complete workflow guide
-│   ├── README-SIMPLE.md  # Simple commands
-│   └── CURSOR-INTEGRATION.md # Cursor setup
-└── README.md             # This file
-
-../pr-reviews/            # Generated reviews (gitignored)
-├── PR-123-2025-10-06.md
-└── PR-123-comments.json
-```
-
-## ⚙️ Setup
-
-```bash
-# 1. Set GitHub token
-export GITHUB_TOKEN="ghp_your_token_here"
-
-# 2. Set repository (for post-comments.sh)
-export GITHUB_OWNER="your-username"
-export GITHUB_REPO="your-repo-name"
-
-# 3. Done!
-```
-
-**Alternative:** Pass repository as arguments:
-```bash
-./post-comments.sh owner repo
-```
-
-## 🎯 Example Workflow
-
-```bash
-# 1. Review a PR
-./review.sh https://github.com/owner/repo/pull/123
-# Copy prompt to Cursor Chat
-
-# 2. Check output
-cat ../pr-reviews/PR-123-comments.json
-
-# 3. Post comments
-./post-comments.sh
-
-# Done! ✅
-```
-
-## 📊 What Gets Generated
-
-### Markdown Review (`PR-123-2025-10-06.md`)
-- Executive summary
-- Issue statistics  
-- Critical/High/Medium issues with fixes
-- Security assessment
-- Performance analysis
-
-### Comments JSON (`PR-123-comments.json`)
 ```json
 [
   {
     "file": "path/to/file.js",
-    "line": 42,
-    "body": "Cursor Review: 🚨 **Critical Issue**\n\n...",
+    "line": 30,
+    "body": "Cursor Review: 🚨 **Critical Issue**\\n\\n**Rule:** general-code-style\\n\\n**Issue:** Magic number detected\\n\\n**Suggested Fix:**\\n```suggestion\\nconst DELAY = 100;\\n```",
     "severity": "CRITICAL"
   }
 ]
 ```
 
-## 🛠️ Troubleshooting
+**Important:** Use `\\n` for newlines in JSON strings, not actual line breaks.
 
-### "No comments JSON found"
-Check file naming: `PR-[NUMBER]-comments.json`
+## 🛠️ Requirements
 
-### "GITHUB_TOKEN not set"
+- **GitHub CLI** (`gh`) - [Install here](https://cli.github.com/)
+- **jq** - JSON processor (`brew install jq`)
+- **Authentication** - Run `gh auth login`
+
+## 📊 Usage
+
 ```bash
-export GITHUB_TOKEN="ghp_your_token_here"
-echo 'export GITHUB_TOKEN="ghp_your_token_here"' >> ~/.zshrc
+# Auto-detect latest PR comments file
+./post-comments.sh
+
+# Specify PR number and file
+./post-comments.sh 12345 comments.json
 ```
 
-### "Failed to post comment"
-- Verify file paths match PR diff
-- Check line numbers are in changed hunks
-- Ensure PR is still open
+The script will:
+1. Validate inputs and requirements
+2. Get the latest commit SHA for the PR
+3. Post each comment as a line-specific review comment
+4. Show success/failure for each comment
+
+## ✅ Features
+
+- **Single-line code suggestions** with proper GitHub formatting
+- **Line-specific comments** that appear exactly where needed
+- **Automatic commit SHA detection** for the PR
+- **Simple JSON format** for easy comment creation
+- **Clean output** with success/failure tracking
+
+## 📝 Example Output
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📝 GitHub PR Comments
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  PR Number:    #12345
+  Comments:     PR-12345-comments.json
+  📝 Found 2 comments to post
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ↳ component.js:30 [CRITICAL] ✨
+    ✅ Posted successfully
+
+  ↳ component.js:55 [HIGH] ✨
+    ✅ Posted successfully
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 Summary:
+  ✅ Posted: 2
+  ❌ Failed: 0
+
+🎉 All comments posted successfully!
+```
 
 ---
 
-**Version:** 2.0 (Simplified)  
-**Last Updated:** October 6, 2025
+**Simple, reliable, and effective PR comment automation.** 🎯
