@@ -1,0 +1,12 @@
+[
+  {
+    "file": "platform-kit-publisher.php",
+    "line": 46,
+    "body": "Cursor Review: 🚨 **Critical Logic Issue**\\n\\n**Rule:** wordpress-php\\n\\n**Issue:** Plugin loads even when required dependencies (Elementor/Elementor Pro) are missing. This could cause fatal errors if dependent functionality is called without proper guards.\\n\\n**Suggested Fix:**\\n```suggestion\\nif ( version_compare( PHP_VERSION, '5.6', '>=' ) && $dependency_checker->check() ) {\\n```",
+    "severity": "CRITICAL",
+    "suggestion": {
+      "original_code": "if ( version_compare( PHP_VERSION, '5.6', '>=' ) ) {",
+      "suggested_code": "if ( version_compare( PHP_VERSION, '5.6', '>=' ) && $dependency_checker->check() ) {"
+    }
+  }
+]

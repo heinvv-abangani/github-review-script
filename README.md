@@ -1,6 +1,6 @@
-# 📝 GitHub PR Comments Script
+# 📝 GitHub PR Review Scripts
 
-Automatically post line-specific code suggestions to GitHub pull requests using GitHub CLI.
+Automated GitHub PR review and comment posting tools with intelligent repository detection.
 
 ## 🚀 Quick Start
 
@@ -8,98 +8,66 @@ Automatically post line-specific code suggestions to GitHub pull requests using 
 # 1. Install requirements
 brew install gh jq
 
-# 2. Authenticate with GitHub
-gh auth login
+# 2. Set up authentication
+export GITHUB_TOKEN="your_github_token_here"
 
-# 3. Create comments JSON file
-cat > PR-12345-comments.json << 'EOF'
-[
-  {
-    "file": "src/component.js",
-    "line": 42,
-    "body": "Issue description\\n\\n```suggestion\\nfixed code line\\n```",
-    "severity": "CRITICAL"
-  }
-]
-EOF
-
-# 4. Post comments
-./post-comments.sh 12345 PR-12345-comments.json
+# 3. Complete workflow
+./review-workflow.sh https://github.com/owner/repo/pull/123
 ```
 
-## 📋 Comment Format
+## 📁 Scripts
 
-```json
-[
-  {
-    "file": "path/to/file.js",
-    "line": 30,
-    "body": "Cursor Review: 🚨 **Critical Issue**\\n\\n**Rule:** general-code-style\\n\\n**Issue:** Magic number detected\\n\\n**Suggested Fix:**\\n```suggestion\\nconst DELAY = 100;\\n```",
-    "severity": "CRITICAL"
-  }
-]
-```
+- **`review-workflow.sh`** - Complete workflow (fetch → review → validate → post)
+- **`fetch-pr.sh`** - Fetch PR content and diff
+- **`review.sh`** - Generate review prompt for Cursor Chat
+- **`post-comments.sh`** - Post comments to GitHub PR
+- **`validate-comments.sh`** - Validate and fix comment JSON
 
-**Important:** Use `\\n` for newlines in JSON strings, not actual line breaks.
+## 🎯 Key Features
 
-## 🛠️ Requirements
+- **Universal Repository Support** - Works with any GitHub repository
+- **Smart Suggestion Formatting** - Prefers single-line suggestions for focused fixes
+- **Intelligent Auto-Detection** - Repository, PR number, and file detection
+- **Robust Error Handling** - Comprehensive validation and troubleshooting
+- **Flexible Authentication** - GITHUB_TOKEN or GitHub CLI
 
-- **GitHub CLI** (`gh`) - [Install here](https://cli.github.com/)
-- **jq** - JSON processor (`brew install jq`)
-- **Authentication** - Run `gh auth login`
+## 📚 Documentation
 
-## 📊 Usage
+- **[Complete Guide](docs/README.md)** - Comprehensive documentation
+- **[Suggestions Guide](docs/SUGGESTIONS-GUIDE.md)** - GitHub suggestion best practices
+- **[Recent Improvements](docs/SUGGESTION-IMPROVEMENTS.md)** - Latest enhancements
+
+## 🔧 Usage Examples
 
 ```bash
-# Auto-detect latest PR comments file
+# Review a PR
+./review.sh https://github.com/elementor/platform-kit-publisher/pull/88
+
+# Post comments (auto-detects latest)
 ./post-comments.sh
 
-# Specify PR number and file
-./post-comments.sh 12345 comments.json
+# Validate comments
+./validate-comments.sh PR-88-comments.json
 ```
 
-The script will:
-1. Validate inputs and requirements
-2. Get the latest commit SHA for the PR
-3. Post each comment as a line-specific review comment
-4. Show success/failure for each comment
+## 🌍 Repository Support
 
-## ✅ Features
+Works with any GitHub repository:
+- `elementor/elementor`
+- `elementor/platform-kit-publisher` 
+- `elementor/elementor-pro`
+- Any public/private repository you have access to
 
-- **Single-line code suggestions** with proper GitHub formatting
-- **Line-specific comments** that appear exactly where needed
-- **Automatic commit SHA detection** for the PR
-- **Simple JSON format** for easy comment creation
-- **Clean output** with success/failure tracking
+## 🔐 Authentication
 
-## 📝 Example Output
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  📝 GitHub PR Comments
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  PR Number:    #12345
-  Comments:     PR-12345-comments.json
-  📝 Found 2 comments to post
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  ↳ component.js:30 [CRITICAL] ✨
-    ✅ Posted successfully
-
-  ↳ component.js:55 [HIGH] ✨
-    ✅ Posted successfully
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📊 Summary:
-  ✅ Posted: 2
-  ❌ Failed: 0
-
-🎉 All comments posted successfully!
+**Recommended:** Use GITHUB_TOKEN environment variable
+```bash
+export GITHUB_TOKEN="ghp_your_token_here"
 ```
 
----
+**Alternative:** GitHub CLI authentication
+```bash
+gh auth login
+```
 
-**Simple, reliable, and effective PR comment automation.** 🎯
+For detailed setup instructions, see [docs/README.md](docs/README.md).

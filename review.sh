@@ -1,6 +1,6 @@
 #!/bin/bash
-# Simplified PR Review Script
-# Usage: ./review.sh <PR_URL>
+# GitHub PR Review Script
+# Usage: ./review.sh <PR_URL> [REPOSITORY]
 
 set -e
 
@@ -11,7 +11,22 @@ if [ -z "$PR_URL" ]; then
   echo ""
   echo "Example:"
   echo "  ./review.sh https://github.com/owner/repo/pull/123"
+  echo ""
+  echo "💡 Tip: Use ./fetch-pr.sh first to get complete PR data for easier review"
   exit 1
+fi
+
+# Setup GitHub authentication (prefer GITHUB_TOKEN)
+if [[ -n "$GITHUB_TOKEN" ]]; then
+    echo "🔐 Using GITHUB_TOKEN for authentication"
+    export GH_TOKEN="$GITHUB_TOKEN"
+elif ! gh auth status &> /dev/null 2>&1; then
+    echo "❌ GitHub authentication required. Either:"
+    echo "  1. Set GITHUB_TOKEN environment variable:"
+    echo "     export GITHUB_TOKEN='your_token_here'"
+    echo "  2. Or authenticate with GitHub CLI:"
+    echo "     gh auth login"
+    exit 1
 fi
 
 if [[ $PR_URL =~ github\.com/([^/]+)/([^/]+)/pull/([0-9]+) ]]; then
@@ -91,7 +106,14 @@ Review GitHub PR: ${PR_URL}
      - Use \`\`\`suggestion code blocks in body for GitHub commit suggestions
      - Add optional "suggestion" object with original_code and suggested_code
      - Suggestions should be complete, working code replacements
-     - Focus on single-line or small multi-line fixes
+     - **PREFER single-line suggestions when possible:**
+       * Primary issue is in one line (condition, assignment, function call)
+       * Fix involves adding/removing/changing one logical element
+       * Use multi-line ONLY when fix requires restructuring multiple lines
+     - **Multi-line suggestions only when:**
+       * Logic restructuring spans multiple lines
+       * Adding new conditional blocks or try-catch blocks
+       * Refactoring requires changing multiple related lines
      - Ensure suggested code follows project coding standards
 
 4. **Summary:**

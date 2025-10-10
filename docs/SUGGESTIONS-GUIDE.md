@@ -38,12 +38,20 @@ When creating review comments, include suggestions using this format:
 - **Complete code**: Provide working, complete code replacements
 - **Proper formatting**: Match the project's coding standards
 - **Context-aware**: Consider surrounding code and dependencies
+- **Minimal precision**: Fix the minimum necessary code with maximum precision
+
+#### 🎯 Prefer Single-Line Suggestions:
+- **Condition changes**: `if (a)` → `if (a && b)`
+- **Function calls**: `func()` → `func(param)`
+- **Variable assignments**: `const x = old` → `const x = new`
+- **Import changes**: `import { a }` → `import { a, b }`
 
 #### ❌ Avoid:
 - **Partial fixes**: Don't suggest incomplete code
 - **Multiple issues**: Don't try to fix multiple problems in one suggestion
 - **Breaking changes**: Ensure suggestions don't break functionality
 - **Style-only changes**: Focus on functional improvements
+- **Unnecessary multi-line**: Don't restructure entire blocks for simple fixes
 
 ## Examples
 
@@ -134,6 +142,8 @@ The GitHub API automatically recognizes `````suggestion` markdown blocks and ren
 3. **Follow standards**: Match the project's coding conventions
 4. **Explain why**: Always include context about why the change is needed
 5. **Keep it simple**: One logical change per suggestion
+6. **Prefer single-line**: Ask "Can I fix this with one line?" before using multi-line
+7. **Minimal precision**: Fix the minimum necessary code with maximum precision
 
 ## Tips for Authors
 
